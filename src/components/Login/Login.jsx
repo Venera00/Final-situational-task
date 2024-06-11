@@ -1,22 +1,40 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        await signInWithEmailAndPassword(auth, values.email, values.password);
+
+        toast.success("Logged in successfully", {
+          position: "top-right",
+        });
+
+        navigate("/profile");
+      } catch (error) {
+        console.log(error.message);
+
+        toast.error(error.message, {
+          position: "bottom-center",
+        });
+      }
     },
   });
   return (
     <div>
       <h3 className="login__title">Login</h3>
-      <form className="login__form">
+      <form onSubmit={formik.handleSubmit} className="login__form">
         <div className="form__component">
           <label htmlFor="email">Email Address:</label>
           <input
