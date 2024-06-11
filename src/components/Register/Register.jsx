@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, firestore } from "../Firebase";
+import { auth, firestore, updateProfile } from "../Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,21 +18,33 @@ const Register = () => {
     },
     onSubmit: async (values) => {
       try {
-        await createUserWithEmailAndPassword(
+        const userCredential = await createUserWithEmailAndPassword(
           auth,
           values.email,
           values.password
         );
-        const user = auth.currentUser;
+        const user = userCredential.user;
+        // const user = auth.currentUser;
         console.log(user);
 
-        if (user) {
-          await setDoc(doc(firestore, "Users", user.uid), {
-            email: values.email,
-            password: values.password,
-            name: values.name,
-          });
-        }
+        await updateProfile(user, {
+          name: values.name,
+        });
+
+        const registrationDate = new Date().toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        // if (user) {
+        await setDoc(doc(firestore, "Users", user.uid), {
+          email: values.email,
+          password: values.password,
+          name: values.name,
+          registrationDate: registrationDate,
+        });
+        // }
 
         toast.success("Successfully registered", {
           position: "top-right",
