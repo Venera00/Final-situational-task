@@ -93,6 +93,7 @@ const Register = () => {
         </div>
         <div className="form__component">
           <label htmlFor="email">Password:</label>
+          <p className="register-sym">At least 6 symbols</p>
           <input
             id="password"
             name="password"
