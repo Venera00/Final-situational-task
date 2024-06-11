@@ -16,6 +16,7 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         await signInWithEmailAndPassword(auth, values.email, values.password);
+        console.log("Successfull login");
 
         toast.success("Logged in successfully", {
           position: "top-right",
