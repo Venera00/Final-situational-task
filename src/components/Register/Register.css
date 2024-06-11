@@ -28,7 +28,7 @@
   font-size: 16px;
   outline: none;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid #1a2130;
 }
 
 .register__btn {
@@ -44,4 +44,14 @@
 
 .register__btn:hover {
   transform: scale(1.1);
+}
+
+.register__subtitle {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login-link {
+  text-decoration: none;
+  color: #5a72a0;
 }

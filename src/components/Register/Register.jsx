@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import "./Register.css";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const formik = useFormik({
@@ -48,8 +49,15 @@ const Register = () => {
             onChange={formik.handleChange}
           />
         </div>
-        <button className="register__btn">Submit</button>
+        <button className="register__btn">Register</button>
       </form>
+
+      <p className="register__subtitle">
+        Already have an account?{" "}
+        <Link to="/login" className="login-link">
+          Login
+        </Link>
+      </p>
     </div>
   );
 };
