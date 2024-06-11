@@ -15,6 +15,9 @@
 
 ![image](https://github.com/Venera00/Final-situational-task/assets/88454006/fb2738e9-8171-4561-8b7f-92b28d48a9bc)
 
+![image](https://github.com/Venera00/Final-situational-task/assets/88454006/e20087da-dfa5-47f7-a703-8a982c49d335)
+
+
 
 
 ## Technologies
